@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 const Addcoffee = () => {
   const handleAddCoffee = (e) => {
     e.preventDefault();
@@ -19,6 +21,28 @@ const Addcoffee = () => {
       photo,
     };
     console.log(newCoffee);
+
+    fetch("http://localhost:5000/coffee", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newCoffee),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        {
+          if (data.insertedId) {
+            Swal.fire({
+              title: "Success!",
+              text: "Coffee Added Successfully",
+              icon: "success",
+              confirmButtonText: "Done!",
+            });
+          }
+        }
+      });
   };
   return (
     <div className="bg-[#F4F3F0] p-24">
@@ -142,3 +166,8 @@ export default Addcoffee;
 
 // imglink URL
 // https://i.ibb.co/8YY1xsr/1.png
+// https://i.ibb.co/0sJVm7m/2.png
+// https://i.ibb.co/6rJRrBv/3.png
+// https://i.ibb.co/YbYLPgC/4.png
+// https://i.ibb.co/tKB0vv7/5.png
+// https://i.ibb.co/YPs8vj0/6.png
