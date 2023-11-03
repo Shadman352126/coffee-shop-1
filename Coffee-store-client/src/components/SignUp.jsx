@@ -14,7 +14,7 @@ const SignUp = () => {
       .then((result) => {
         console.log(result.user);
         // create new user and send to database
-        const createdAt = result.user.metadata.creationTime;
+        const createdAt = result.user?.metadata?.creationTime;
         const user = { email, createdAt: createdAt };
         fetch("http://localhost:5000/user", {
           method: "POST",
@@ -34,6 +34,7 @@ const SignUp = () => {
                   icon: "success",
                   confirmButtonText: "Done!",
                 });
+                form.reset();
               }
             }
           });
